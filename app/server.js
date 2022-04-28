@@ -15,6 +15,12 @@ app.get("/v1/estudiantes", (request, response) => {
     response.json(datosEstudiantes);
 });
 
+app.get("/v1/estudiantes/emails", (request, response) => {
+    const explorers = Reader.readJsonFile("visualpartners.json");
+    const emailsEstudiantes = ExplorerService.getEmailEstudiantes(explorers);
+    response.json(emailsEstudiantes);
+});
+
 app.listen(port, () => {
     console.log(`Code Challenge API in localhost:${port}`);
 });
