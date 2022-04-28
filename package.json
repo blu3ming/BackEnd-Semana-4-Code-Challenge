@@ -1,0 +1,27 @@
+{
+  "name": "codechallenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blu3ming/BackEnd-Semana-4-Code-Challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blu3ming/BackEnd-Semana-4-Code-Challenge/issues"
+  },
+  "homepage": "https://github.com/blu3ming/BackEnd-Semana-4-Code-Challenge#readme",
+  "dependencies": {
+    "express": "^4.18.0",
+    "jest": "^28.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
+  }
+}
