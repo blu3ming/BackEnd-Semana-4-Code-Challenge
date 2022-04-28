@@ -105,3 +105,23 @@ graph TD;
     Reader-->ExplorerService;
     ExplorerService-->Server
 ```
+
+7. Por último, para el desarrollo de la API se requiere de los siguientes endpoints:
+
+| Endpoint | Request | Response |
+|---|---|---|
+| `localhost:3000/v1/estudiantes` | `localhost:3000/v1/estudiantes` | Se deberá obtener la información de todos los estudiantes con todos sus campos |
+| `localhost:3000/v1/estudiantes/emails` | `localhost:3000/v1/estudiantes/emails` | Se deberá obtener el email de todos los estudiantes que tengan una certificación |
+| `localhost:3000/v1/estudiantes/creditosMinimos` | `localhost:3000/v1/estudiantes/creditosMinimos` | Se deberá obtener la información de todos los estudiantes que tengan credits mayores a 500 |
+
+8. En el caso del primer endpoint, se observa que este retorna toda la información de todos los estudiantes cuando se consulta:
+
+![image](https://user-images.githubusercontent.com/25083316/165818295-94c5e579-751e-406c-b9f7-4504e13efe2d.png)
+
+9. Para el segundo endpoint, se observa cómo este retorna únicamente una lista de emails, la cual corresponde a los estudiantes que cuentan con una certificación de acuerdo a la información dada por la base de datos:
+
+![image](https://user-images.githubusercontent.com/25083316/165818457-25d3c1f0-b16b-4f2a-b831-f85c7a51707a.png)
+
+10. Y por último, el tercer endpoint requerido nos muestra la información de todos aquellos estudiantes que cuenten con un score mayor a 500:
+
+![image](https://user-images.githubusercontent.com/25083316/165818582-5c5376d4-d1c7-4721-aeee-468c75c02672.png)
