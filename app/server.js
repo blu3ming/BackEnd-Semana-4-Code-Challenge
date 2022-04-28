@@ -1,3 +1,5 @@
+const Reader = require("../app/utils/reader");
+const ExplorerService = require("../app/services/ExplorersService");
 const express = require("express");
 const app = express();
 app.use(express.json());
@@ -7,10 +9,10 @@ app.get("/", (request, response) => {
     response.json({message: "CodeChallenge Api welcome!"});
 });
 
-app.get("/v1/fizzbuzz/:score", (request, response) => {
-    const score = request.params.score;
-    const validationResponse = FizzBuzzService.applyValidationInNumber(score);
-    response.json({score: score, trick: validationResponse});
+app.get("/v1/estudiantes", (request, response) => {
+    const explorers = Reader.readJsonFile("visualpartners.json");
+    const datosEstudiantes = ExplorerService.readAllInfo(explorers);
+    response.json(datosEstudiantes);
 });
 
 app.listen(port, () => {
