@@ -5,7 +5,7 @@ describe("Tests para requerimientos", () => {
     test("1) Consulta todos los estudiantes", () => {
         const explorers = Reader.readJsonFile("visualpartners.json");
         const datosEstudiantes = ExplorerService.readAllInfo(explorers)
-        expect(datosEstudiantes).not.toBeNull();
+        expect(datosEstudiantes.length).toBe(51);
     });
 
     test("2) Obtiene emails de todos los estudiantes con certificacion", () => {
