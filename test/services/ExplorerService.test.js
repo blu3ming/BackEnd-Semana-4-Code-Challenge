@@ -17,6 +17,6 @@ describe("Tests para requerimientos", () => {
     test("3) Estudiantes con credits mayores a 500", () => {
         const explorers = Reader.readJsonFile("visualpartners.json");
         const listaEstudiantesCredits = ExplorerService.getEstudiantesCreditos(explorers)
-        expect(listaEstudiantesCredits).not.toBeNull();
+        expect(listaEstudiantesCredits.length).toBe(27);
     });
 });

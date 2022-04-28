@@ -7,7 +7,8 @@ class ExplorerService{
         return emailList;
     }
     static getEstudiantesCreditos(estudiantes){
-
+        const estudiantesCreditos = estudiantes.filter((estudiante) => estudiante.credits > 500)
+        return estudiantesCreditos;
     }
 }
 
