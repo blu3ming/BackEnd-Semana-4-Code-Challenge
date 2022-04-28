@@ -1,4 +1,4 @@
-const Reader = require("./../../app/utils/reader")
+const Reader = require("./../../app/utils/reader");
 
 describe("Test para Reader", () => {
     test("1) Lectura de archivo correcta", () => {
