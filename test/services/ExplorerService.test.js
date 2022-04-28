@@ -11,7 +11,7 @@ describe("Tests para requerimientos", () => {
     test("2) Obtiene emails de todos los estudiantes con certificacion", () => {
         const explorers = Reader.readJsonFile("visualpartners.json");
         const emailsEstudiantes = ExplorerService.getEmailEstudiantes(explorers)
-        expect(emailsEstudiantes).not.toBeNull();
+        expect(emailsEstudiantes.length).toBe(29);
     });
 
     test("3) Estudiantes con credits mayores a 500", () => {
