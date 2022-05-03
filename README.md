@@ -43,9 +43,9 @@ classDiagram
 ```mermaid        
 classDiagram
     class ExplorersController
-    ExplorersService : +readInfoStudents()
-    ExplorersService : +getStudentsMail()
-    ExplorersService : +getStudentsWithCredits()
+    ExplorersController : +readInfoStudents()
+    ExplorersController : +getStudentsMail()
+    ExplorersController : +getStudentsWithCredits()
 ```
 
 2. Para iniciar, se propone una prueba para comprobar un correcto acceso a la base de datos (archivo visualpartners.json)
