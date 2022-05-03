@@ -1,4 +1,4 @@
-const ExplorerService = require("../app/controllers/ExplorersController");
+const ExplorerController = require("../app/controllers/ExplorersController");
 const express = require("express");
 const app = express();
 app.use(express.json());
@@ -9,17 +9,17 @@ app.get("/", (request, response) => {
 });
 
 app.get("/v1/estudiantes", (request, response) => {
-    const datosEstudiantes = ExploreController.readAllInfo();
+    const datosEstudiantes = ExplorerController.readInfoStudents();
     response.json(datosEstudiantes);
 });
 
 app.get("/v1/estudiantes/emails", (request, response) => {
-    const emailsEstudiantes = ExplorerController.getEmailEstudiantes();
+    const emailsEstudiantes = ExplorerController.getStudentsMail();
     response.json(emailsEstudiantes);
 });
 
 app.get("/v1/estudiantes/creditosMinimos", (request, response) => {
-    const listaEstudiantesCredits = ExplorerController.getEstudiantesCreditos();
+    const listaEstudiantesCredits = ExplorerController.getStudentsWithCredits();
     response.json(listaEstudiantesCredits);
 });
 
