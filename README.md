@@ -29,15 +29,23 @@ Componentes:
 ```mermaid
 classDiagram
     class Reader
-    Reader : +readJsonFile(path
+    Reader : +readJsonFile(path)
 ```
 
 ```mermaid        
 classDiagram
     class ExplorersService
-    ExplorersService : +readAllInfo(estudiantes)
-    ExplorersService : +getEmailEstudiantes(estudiantes)
-    ExplorersService : +getEstudiantesCreditos(estudiantes)
+    ExplorersService : +readAllInfo()
+    ExplorersService : +getEmailEstudiantes()
+    ExplorersService : +getEstudiantesCreditos()
+```
+
+```mermaid        
+classDiagram
+    class ExplorersController
+    ExplorersService : +readInfoStudents()
+    ExplorersService : +getStudentsMail()
+    ExplorersService : +getStudentsWithCredits()
 ```
 
 2. Para iniciar, se propone una prueba para comprobar un correcto acceso a la base de datos (archivo visualpartners.json)
@@ -60,53 +68,71 @@ classDiagram
   }
   ```
   
-4. Ya teniendo el acceso a la base de datos, solo se propone una clase más que logre ejecutar los tres requerimientos solicitados, llamada ExplorersService. Para poder llevarlo a cabo, inicializamos las pruebas de dicha clase:
+4. Ya teniendo el acceso a la base de datos, se propone una clase más que logre ejecutar los tres requerimientos solicitados, llamada ExplorersService. Para poder llevarlo a cabo, inicializamos las pruebas de dicha clase:
 
   ```
   test("1) Consulta todos los estudiantes", () => {
-    const explorers = Reader.readJsonFile("visualpartners.json");
-    const datosEstudiantes = ExplorerService.readAllInfo(explorers);
+    const datosEstudiantes = ExplorerService.readAllInfo();
     expect(datosEstudiantes.length).toBe(51);
   });
 
   test("2) Obtiene emails de todos los estudiantes con certificacion", () => {
-    const explorers = Reader.readJsonFile("visualpartners.json");
-    const emailsEstudiantes = ExplorerService.getEmailEstudiantes(explorers);
+    const emailsEstudiantes = ExplorerService.getEmailEstudiantes();
     expect(emailsEstudiantes.length).toBe(29);
   });
 
   test("3) Estudiantes con credits mayores a 500", () => {
-    const explorers = Reader.readJsonFile("visualpartners.json");
-    const listaEstudiantesCredits = ExplorerService.getEstudiantesCreditos(explorers);
+    const listaEstudiantesCredits = ExplorerService.getEstudiantesCreditos();
     expect(listaEstudiantesCredits.length).toBe(27);
   });
   ```
   
-5. Y para darle solución, se desarrollaron tres funciones en la clase mencionada para cumplir con las pruebas instanciadas y así cumplir los requerimientos:
+5. Y para darle solución, se desarrollaron tres funciones en la clase mencionada para cumplir con las pruebas instanciadas y así cumplir los requerimientos (dado que esta clase se comunica directamente con la clase Reader, manda a llamarla dentro de cada función para obtener los datos de los estudiantes):
 
   ```
-  static readAllInfo(estudiantes){
+  static readAllInfo(){
+    const estudiantes = Reader.readJsonFile("visualpartners.json");
     return estudiantes;
   }
-  static getEmailEstudiantes(estudiantes){
+  static getEmailEstudiantes(){
+    const estudiantes = Reader.readJsonFile("visualpartners.json");
     const emailList = estudiantes.filter(estudiante => estudiante.haveCertification).map((estudiante) => estudiante.email);
     return emailList;
   }
-  static getEstudiantesCreditos(estudiantes){
+  static getEstudiantesCreditos(){
+    const estudiantes = Reader.readJsonFile("visualpartners.json");
     const estudiantesCreditos = estudiantes.filter((estudiante) => estudiante.credits > 500);
     return estudiantesCreditos;
   }
   ```
   
-6. El objetivo de esta clase es estar conectada directamente con la clase Reader para leer de la base de datos, y a su vez estar conectada con el servidor que proporcionará la API. Es decir, se tiene la siguiente estructura de componentes:
+6. El objetivo de esta clase es estar conectada directamente con la clase Reader para leer de la base de datos, y a su vez estar conectada con otra clase Controller que lleve el control de este y otros servicios que se quieran incorporar. Al solo ser un puente entre la API y la clase Service, no hace otra cosa que pasar información entre funciones:
+
+  ```
+  static readInfoStudents(){
+    const estudiantes = ExplorersService.readAllInfo();
+    return estudiantes;
+  }
+  static getStudentsMail(){
+    const emails = ExplorersService.getEmailEstudiantes();
+    return emails;
+  }
+  static getStudentsWithCredits(){
+    const estudiantes = ExplorersService.getEstudiantesCreditos();
+    return estudiantes;
+  }
+  ```
+
+7. De esta manera, todas estas clases se conectan de la siguiente manera, siendo la última (el Controller) la que se conecta directamente con el servidor que proporcionará la API. Es decir, se tiene la siguiente estructura de componentes:
 
 ```mermaid
 graph TD;
     Reader-->ExplorerService;
-    ExplorerService-->Server
+    ExplorerService-->ExplorerController;
+    ExplorerController-->Server
 ```
 
-7. Por último, para el desarrollo de la API se requiere de los siguientes endpoints:
+1. Por último, para el desarrollo de la API se requiere de los siguientes endpoints:
 
 | Endpoint | Request | Response |
 |---|---|---|
