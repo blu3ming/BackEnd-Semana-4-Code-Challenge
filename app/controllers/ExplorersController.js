@@ -1,4 +1,4 @@
-const ExplorersService = require('../services/ExplorersService')
+const ExplorersService = require("../services/ExplorersService");
 
 class ExplorersController{
     static readInfoStudents(){

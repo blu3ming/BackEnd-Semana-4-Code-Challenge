@@ -1,4 +1,4 @@
-const Reader = require('../utils/reader')
+const Reader = require("../utils/reader");
 
 class ExplorerService{
     static readAllInfo(){
