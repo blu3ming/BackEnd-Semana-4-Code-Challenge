@@ -10,20 +10,17 @@ app.get("/", (request, response) => {
 });
 
 app.get("/v1/estudiantes", (request, response) => {
-    const explorers = Reader.readJsonFile("visualpartners.json");
-    const datosEstudiantes = ExplorerService.readAllInfo(explorers);
+    const datosEstudiantes = ExplorerService.readAllInfo();
     response.json(datosEstudiantes);
 });
 
 app.get("/v1/estudiantes/emails", (request, response) => {
-    const explorers = Reader.readJsonFile("visualpartners.json");
-    const emailsEstudiantes = ExplorerService.getEmailEstudiantes(explorers);
+    const emailsEstudiantes = ExplorerService.getEmailEstudiantes();
     response.json(emailsEstudiantes);
 });
 
 app.get("/v1/estudiantes/creditosMinimos", (request, response) => {
-    const explorers = Reader.readJsonFile("visualpartners.json");
-    const listaEstudiantesCredits = ExplorerService.getEstudiantesCreditos(explorers);
+    const listaEstudiantesCredits = ExplorerService.getEstudiantesCreditos();
     response.json(listaEstudiantesCredits);
 });
 
